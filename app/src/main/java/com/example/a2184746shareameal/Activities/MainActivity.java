@@ -1,8 +1,10 @@
-package com.example.a2184746shareameal;
+package com.example.a2184746shareameal.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.a2184746shareameal.R;
 
 public class MainActivity extends AppCompatActivity {
 
