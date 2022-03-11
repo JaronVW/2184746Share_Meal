@@ -1,6 +1,6 @@
 package com.example.a2184746shareameal.Domain;
 
-public class Ingredient {
+public class Ingredient implements  APIObject {
 
     private final String name, imageURL;
     private final boolean isAllergenic;

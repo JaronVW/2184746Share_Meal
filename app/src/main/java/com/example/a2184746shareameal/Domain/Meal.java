@@ -3,7 +3,7 @@ package com.example.a2184746shareameal.Domain;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class Meal {
+public class Meal implements APIObject {
     private final String name, description, imageURL;
     private final LocalDateTime dateTime;
 
