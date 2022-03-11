@@ -4,7 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Meal implements APIObject {
-    private final String name, description, imageURL;
+    private final String name, description;
+    private final int imageURL;
     private final LocalDateTime dateTime;
 
     private final ArrayList<Ingredient> ingredientList;
@@ -13,8 +14,9 @@ public class Meal implements APIObject {
     private final boolean isVegetarian, isVegan, isToTakeHome, isActive;
 
     private final int maxAmountParticipants;
+    private final double price;
 
-    public Meal(String name, String description, String imageURL, LocalDateTime dateTime, ArrayList<Ingredient> ingredientList, ArrayList<String> allergyInfoList, boolean isVegetarian, boolean isVegan, boolean isToTakeHome, boolean isActive, int maxAmountParticipants) {
+    public Meal(String name, String description, int imageURL, LocalDateTime dateTime, ArrayList<Ingredient> ingredientList, ArrayList<String> allergyInfoList, boolean isVegetarian, boolean isVegan, boolean isToTakeHome, boolean isActive, int maxAmountParticipants, double price) {
         this.name = name;
         this.description = description;
         this.imageURL = imageURL;
@@ -26,6 +28,7 @@ public class Meal implements APIObject {
         this.isToTakeHome = isToTakeHome;
         this.isActive = isActive;
         this.maxAmountParticipants = maxAmountParticipants;
+        this.price = price;
     }
 
     public String getName() {
@@ -36,7 +39,7 @@ public class Meal implements APIObject {
         return description;
     }
 
-    public String getImageURL() {
+    public int getImageURL() {
         return imageURL;
     }
 
@@ -70,5 +73,9 @@ public class Meal implements APIObject {
 
     public int getMaxAmountParticipants() {
         return maxAmountParticipants;
+    }
+
+    public double getPrice() {
+        return price;
     }
 }
