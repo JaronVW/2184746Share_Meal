@@ -1,6 +1,6 @@
 package com.example.a2184746shareameal.Domain;
 
-public class DataModel implements APIObject {
+public class DataModel {
     private int userId, id;
     private String title;
     private boolean completed;

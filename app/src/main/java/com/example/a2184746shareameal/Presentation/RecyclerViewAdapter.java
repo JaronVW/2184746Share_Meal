@@ -1,4 +1,4 @@
-package com.example.a2184746shareameal.Activities;
+package com.example.a2184746shareameal.Presentation;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -37,7 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.image.setImageResource(mealList.get(position).getImageURL());
+//        holder.image.setImageResource(mealList.get(position).getImageUrl());
         holder.name.setText(mealList.get(position).getName());
         holder.date.setText(mealList.get(position).getDateTime().toString());
         holder.city.setText(mealList.get(position).getName());
