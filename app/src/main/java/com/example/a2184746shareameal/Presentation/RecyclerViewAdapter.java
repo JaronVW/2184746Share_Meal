@@ -12,19 +12,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a2184746shareameal.Domain.Meal;
 import com.example.a2184746shareameal.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
 
 
-    private ArrayList<Meal> mealList;
-    private LayoutInflater inflater;
+    private final ArrayList<Meal> MealList;
+    private final LayoutInflater inflater;
+    private final Context context;
 
 
     public RecyclerViewAdapter(Context context, ArrayList<Meal> mealList) {
         this.inflater = LayoutInflater.from(context);
-        this.mealList = mealList;
+        this.MealList = mealList;
+        this.context = context;
     }
 
 
@@ -37,16 +40,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+
+        Picasso.with(context).load(MealList.get(position).getImageUrl())
+                .placeholder(R.drawable.ic_launcher_background)
+                .fit()
+                .into(holder.image);
+
+
 //        holder.image.setImageResource(mealList.get(position).getImageUrl());
-        holder.name.setText(mealList.get(position).getName());
-        holder.date.setText(mealList.get(position).getDateTime().toString());
-        holder.city.setText(mealList.get(position).getName());
-        holder.price.setText(String.valueOf(mealList.get(position).getPrice()));
+        holder.name.setText(MealList.get(position).getName());
+        holder.date.setText(MealList.get(position).getDateTime().toString());
+        holder.city.setText(MealList.get(position).getName());
+        holder.price.setText(String.valueOf(MealList.get(position).getPrice()));
     }
 
     @Override
     public int getItemCount() {
-        return mealList.size();
+        return MealList.size();
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
