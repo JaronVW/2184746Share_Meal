@@ -12,6 +12,6 @@ public interface MyAPICall {
     Call<DataModel> getTestData();
 
     @GET("api/meal")
-    Call<Meal> getMeals();
+    Call<MealList> getMeals();
 
 }
