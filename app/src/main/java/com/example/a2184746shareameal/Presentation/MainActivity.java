@@ -12,7 +12,7 @@ import com.example.a2184746shareameal.R;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements APIConnection.MealListener {
+public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
@@ -30,10 +30,6 @@ public class MainActivity extends AppCompatActivity implements APIConnection.Mea
     }
 
 
-    @Override
-    public void OnMealAvailable(ArrayList<Meal> meals) {
-        this.recyclerViewAdapter = new RecyclerViewAdapter(MainActivity.this, meals);
-        recyclerView.setAdapter(recyclerViewAdapter);
-    }
+
 
 }

@@ -54,7 +54,7 @@ public class APIConnection {
     }
 
     public interface MealListener{
-        public void OnMealAvailable(ArrayList<Meal> meals);
+        public ArrayList<Meal> OnMealAvailable(ArrayList<Meal> meals);
 
     }
 
