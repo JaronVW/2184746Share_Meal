@@ -1,11 +1,14 @@
 package com.example.a2184746shareameal.Domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Meal {
+public class Meal implements Parcelable {
 
     @SerializedName("id")
     @Expose
@@ -193,4 +196,13 @@ public class Meal {
         return city;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+    }
 }

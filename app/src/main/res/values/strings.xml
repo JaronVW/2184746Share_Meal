@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">2184746 Share a Meal</string>
-
+    <string name="currency">Price: €</string>
 </resources>

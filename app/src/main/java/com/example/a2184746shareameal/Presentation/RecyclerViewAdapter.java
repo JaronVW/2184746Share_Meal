@@ -16,30 +16,32 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.MyViewHolder> {
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
 
     private final ArrayList<Meal> MealList;
     private final LayoutInflater inflater;
     private final Context context;
+    private ViewHolder.onNoteListener onNoteListener;
 
 
-    public RecyclerViewAdapter(Context context, ArrayList<Meal> mealList) {
+    public RecyclerViewAdapter(Context context, ArrayList<Meal> mealList, ViewHolder.onNoteListener onNoteListener) {
         this.inflater = LayoutInflater.from(context);
         this.MealList = mealList;
         this.context = context;
+        this.onNoteListener = onNoteListener;
     }
 
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = inflater.inflate(R.layout.recyclerview_meal_row, parent, false);
-        return new MyViewHolder(itemView, this);
+        return new ViewHolder(itemView, this, this.onNoteListener);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         Picasso.with(context).load(MealList.get(position).getImageUrl())
                 .placeholder(R.drawable.ic_launcher_background)
@@ -51,7 +53,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.name.setText(MealList.get(position).getName());
         holder.date.setText(MealList.get(position).getDateTime().toString());
         holder.city.setText(MealList.get(position).getName());
-        holder.price.setText(String.valueOf(MealList.get(position).getPrice()));
+        holder.price.setText("Price: €" + MealList.get(position).getPrice());
     }
 
     @Override
@@ -59,16 +61,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return MealList.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public final ImageView image;
-        public TextView name;
-        public TextView date;
-        public final TextView city;
-        public final TextView price;
-        final RecyclerViewAdapter adapter;
+        private final ImageView image;
+        private final TextView name, date, city, price;
+        private final RecyclerViewAdapter adapter;
+        onNoteListener onNoteListener;
 
-        public MyViewHolder(@NonNull View itemView, RecyclerViewAdapter mAdapter) {
+        public ViewHolder(@NonNull View itemView, RecyclerViewAdapter mAdapter, onNoteListener onNoteListener) {
             super(itemView);
             image = itemView.findViewById(R.id.image);
             name = itemView.findViewById(R.id.name);
@@ -77,6 +77,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             price = itemView.findViewById(R.id.price);
             // assigns data in recyclerview to variables to pass content from object
             this.adapter = mAdapter;
+            this.onNoteListener = onNoteListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View view) {
+            onNoteListener.onNoteClick(getAdapterPosition());
+        }
+
+        public interface onNoteListener {
+            void onNoteClick(int position);
+        }
+
     }
+
+
 }
