@@ -8,10 +8,7 @@ import retrofit2.http.GET;
 
 public interface MyAPICall {
 
-    @GET("")
-    Call<DataModel> getTestData();
-
-    @GET("api/meal")
+    @GET("/api/meal")
     Call<MealList> getMeals();
 
 }

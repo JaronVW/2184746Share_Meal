@@ -3,8 +3,6 @@ package com.example.a2184746shareameal.Domain;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 public class Meal {
@@ -32,7 +30,7 @@ public class Meal {
     private Boolean isToTakeHome;
     @SerializedName("dateTime")
     @Expose
-    private LocalDate dateTime;
+    private String dateTime;
     @SerializedName("maxAmountOfParticipants")
     @Expose
     private Integer maxAmountOfParticipants;
@@ -47,27 +45,31 @@ public class Meal {
     private List<String> allergenes = null;
     @SerializedName("participants")
     @Expose
-    private List<String> participants = null;
+    private List<Person> participants = null;
+
+    @SerializedName("city")
+    @Expose
+    private String city;
 
 
 
     /**
-     *
-     * @param dateTime
+     *  @param id
+     * @param name
      * @param description
      * @param isActive
+     * @param isVega
      * @param isVegan
      * @param isToTakeHome
+     * @param dateTime
+     * @param maxAmountOfParticipants
      * @param price
      * @param imageUrl
-     * @param name
-     * @param isVega
      * @param allergenes
-     * @param id
-     * @param maxAmountOfParticipants
      * @param participants
+     * @param city
      */
-    public Meal(Integer id, String name, String description, Boolean isActive, Boolean isVega, Boolean isVegan, Boolean isToTakeHome, LocalDate dateTime, Integer maxAmountOfParticipants, Double price, String imageUrl, List<String> allergenes, List<String> participants) {
+    public Meal(Integer id, String name, String description, Boolean isActive, Boolean isVega, Boolean isVegan, Boolean isToTakeHome, String dateTime, Integer maxAmountOfParticipants, Double price, String imageUrl, List<String> allergenes, List<Person> participants, String city) {
         super();
         this.id = id;
         this.name = name;
@@ -82,6 +84,7 @@ public class Meal {
         this.imageUrl = imageUrl;
         this.allergenes = allergenes;
         this.participants = participants;
+        this.city = city;
     }
 
     public Integer getId() {
@@ -140,7 +143,7 @@ public class Meal {
         this.isToTakeHome = isToTakeHome;
     }
 
-    public LocalDate getDateTime() {
+    public String getDateTime() {
         return dateTime;
     }
 
@@ -178,12 +181,16 @@ public class Meal {
         this.allergenes = allergenes;
     }
 
-    public List<String> getParticipants() {
+    public List<Person> getParticipants() {
         return participants;
     }
 
-    private void setParticipants(List<String> participants) {
+    private void setParticipants(List<Person> participants) {
         this.participants = participants;
+    }
+
+    public String getCity() {
+        return city;
     }
 
 }

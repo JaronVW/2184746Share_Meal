@@ -3,6 +3,7 @@ package com.example.a2184746shareameal.DataStorage;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.a2184746shareameal.Domain.Meal;
@@ -17,11 +18,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class APIConnection {
 
-    private final String baseURL;
-    private MyAPICall service;
+    private final MyAPICall service;
+    public final String TAG = getClass().getSimpleName();
 
     public APIConnection(String baseURL) {
-        this.baseURL = baseURL;
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(baseURL)
@@ -39,15 +39,18 @@ public class APIConnection {
         call.enqueue(new Callback<MealList>() {
             @Override
             public void onResponse(Call<MealList> call, Response<MealList> response) {
-                assert response.body() != null;
+
+                Log.d(TAG, String.valueOf(response.code()));
+
                 if (response.isSuccessful()) {
                     listener.OnMealAvailable(response.body().getResult());
+                    Log.d("Debug", String.valueOf(response.body().getResult()));
                 }
             }
 
             @Override
-            public void onFailure(Call<MealList> call, Throwable t) {
-                Log.d("debug", "failed");
+            public void onFailure(@NonNull Call<MealList> call, @NonNull Throwable t) {
+                Log.d("debug", t.toString());
             }
         });
 

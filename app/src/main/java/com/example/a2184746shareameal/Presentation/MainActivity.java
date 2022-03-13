@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements APIConnection.Mea
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
+    private APIConnection apiConnection = null;
 
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -23,9 +24,10 @@ public class MainActivity extends AppCompatActivity implements APIConnection.Mea
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 1);
         recyclerView.setLayoutManager(layoutManager);
-
+        this.apiConnection = new APIConnection("https://shareameal-api.herokuapp.com");
+        this.apiConnection.getAPIData(this);
 
     }
 
