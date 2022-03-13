@@ -40,6 +40,7 @@ public class APIConnection {
             @Override
             public void onResponse(Call<MealList> call, Response<MealList> response) {
                 assert response.body() != null;
+                Log.d("debug", String.valueOf(response.code()));
                 if (response.isSuccessful()) {
                     listener.OnMealAvailable(response.body().getResult());
                 }
@@ -54,7 +55,7 @@ public class APIConnection {
     }
 
     public interface MealListener{
-        public void OnMealAvailable(ArrayList<Meal> meals);
+        public ArrayList<Meal> OnMealAvailable(ArrayList<Meal> meals);
 
     }
 

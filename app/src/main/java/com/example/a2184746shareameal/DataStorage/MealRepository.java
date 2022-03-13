@@ -1,5 +1,6 @@
 package com.example.a2184746shareameal.DataStorage;
 
+import android.location.GnssAntennaInfo;
 import android.util.Log;
 
 import com.example.a2184746shareameal.Domain.Meal;
@@ -13,23 +14,21 @@ public class MealRepository implements APIConnection.MealListener {
     private final APIConnection apiConnection;
     private final String TAG;
 
+
     public MealRepository() {
         apiConnection = new APIConnection("https://shareameal-api.herokuapp.com");
         TAG = getClass().getSimpleName();
-
-    }
-
-    public ArrayList<Meal> getMeals() {
-
         apiConnection.getAPIData(this);
-        Log.d(TAG,meals.get(0).getName());
-        return meals;
     }
 
     @Override
-    public void OnMealAvailable(ArrayList<Meal> meals) {
+    public ArrayList<Meal> OnMealAvailable(ArrayList<Meal> meals) {
         this.meals = meals;
+
+        return meals;
     }
 
-
+    public ArrayList<Meal> getMeals() {
+        return meals;
+    }
 }
