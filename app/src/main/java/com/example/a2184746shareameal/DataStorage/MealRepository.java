@@ -10,7 +10,7 @@ public class MealRepository implements APIConnection.MealListener {
     private ArrayList<Meal> meals;
 
     public MealRepository() {
-//        this.meals = OnMealAvailable();
+
     }
 
     @Override
