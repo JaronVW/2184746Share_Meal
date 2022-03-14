@@ -3,7 +3,9 @@ package com.example.a2184746shareameal.Domain;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     @SerializedName("firstName")
     @Expose
     private String firstName;

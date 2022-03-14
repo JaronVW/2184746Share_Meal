@@ -3,12 +3,15 @@ package com.example.a2184746shareameal.Presentation;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a2184746shareameal.Application.Formatters;
 import com.example.a2184746shareameal.DataStorage.APIConnection;
 import com.example.a2184746shareameal.DataStorage.MealList;
 import com.example.a2184746shareameal.Domain.Meal;
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity implements APIConnection.Mea
     private RecyclerViewAdapter recyclerViewAdapter;
     private APIConnection apiConnection = null;
     private ArrayList<Meal> mealList = new ArrayList<>();
+    private ArrayList<Meal> veganMealList = new ArrayList<>();
+    private ArrayList<Meal> vegaMealList = new ArrayList<>();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +47,23 @@ public class MainActivity extends AppCompatActivity implements APIConnection.Mea
 
 
     @Override
-    public void OnMealAvailable(ArrayList<Meal> meals) {
+    public void getMeals(ArrayList<Meal> meals) {
         this.recyclerViewAdapter = new RecyclerViewAdapter(MainActivity.this, meals,this);
-        this.mealList = meals;
         recyclerView.setAdapter(recyclerViewAdapter );
+
+        CharSequence text = meals.size()+ " items";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(this, text, duration);
+        toast.show();
+        this.mealList = meals;
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            ArrayList<Meal>[] filteredLists = Formatters.filterMeals(meals,veganMealList,veganMealList);
+            veganMealList = filteredLists[0];
+            vegaMealList = filteredLists[1];
+
+        }
+
     }
 
 
@@ -53,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements APIConnection.Mea
     public void onNoteClick(int position) {
 
         Intent intent = new Intent(this,MealDetailActivity.class);
-        intent.putExtra("Meal",  mealList.get(position));
+        intent.putExtra("meal", (Serializable)  mealList.get(position));
         startActivity(intent);
     }
 }

@@ -4,7 +4,6 @@ package com.example.a2184746shareameal.DataStorage;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.a2184746shareameal.Domain.Meal;
 
@@ -43,7 +42,7 @@ public class APIConnection {
                 Log.d(TAG, String.valueOf(response.code()));
 
                 if (response.isSuccessful()) {
-                    listener.OnMealAvailable(response.body().getResult());
+                    listener.getMeals(response.body().getResult());
                     Log.d("Debug", String.valueOf(response.body().getResult()));
                 }
             }
@@ -57,7 +56,7 @@ public class APIConnection {
     }
 
     public interface MealListener{
-        public void OnMealAvailable(ArrayList<Meal> meals);
+        public void getMeals(ArrayList<Meal> meals);
 
     }
 

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a2184746shareameal.Application.Formatters;
 import com.example.a2184746shareameal.Domain.Meal;
 import com.example.a2184746shareameal.R;
 import com.squareup.picasso.Picasso;
@@ -51,9 +52,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
 //        holder.image.setImageResource(mealList.get(position).getImageUrl());
         holder.name.setText(MealList.get(position).getName());
-        holder.date.setText(MealList.get(position).getDateTime().toString());
+        holder.date.setText(Formatters.cleanDate(MealList.get(position).getDateTime()));
         holder.city.setText(MealList.get(position).getName());
         holder.price.setText("Price: €" + MealList.get(position).getPrice());
+
     }
 
     @Override

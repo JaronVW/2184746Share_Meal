@@ -6,9 +6,10 @@ import android.os.Parcelable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Meal implements Parcelable {
+public class Meal implements Serializable {
 
     @SerializedName("id")
     @Expose
@@ -54,6 +55,10 @@ public class Meal implements Parcelable {
     @Expose
     private String city;
 
+    @SerializedName("cook")
+    @Expose
+    private Cook cook;
+
 
 
     /**
@@ -89,6 +94,39 @@ public class Meal implements Parcelable {
         this.participants = participants;
         this.city = city;
     }
+
+    protected Meal(Parcel in) {
+        if (in.readByte() == 0) {
+            id = null;
+        } else {
+            id = in.readInt();
+        }
+        name = in.readString();
+        description = in.readString();
+        byte tmpIsActive = in.readByte();
+        isActive = tmpIsActive == 0 ? null : tmpIsActive == 1;
+        byte tmpIsVega = in.readByte();
+        isVega = tmpIsVega == 0 ? null : tmpIsVega == 1;
+        byte tmpIsVegan = in.readByte();
+        isVegan = tmpIsVegan == 0 ? null : tmpIsVegan == 1;
+        byte tmpIsToTakeHome = in.readByte();
+        isToTakeHome = tmpIsToTakeHome == 0 ? null : tmpIsToTakeHome == 1;
+        dateTime = in.readString();
+        if (in.readByte() == 0) {
+            maxAmountOfParticipants = null;
+        } else {
+            maxAmountOfParticipants = in.readInt();
+        }
+        if (in.readByte() == 0) {
+            price = null;
+        } else {
+            price = in.readDouble();
+        }
+        imageUrl = in.readString();
+        allergenes = in.createStringArrayList();
+        city = in.readString();
+    }
+
 
     public Integer getId() {
         return id;
@@ -196,13 +234,7 @@ public class Meal implements Parcelable {
         return city;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel parcel, int i) {
-
+    public Cook getCook() {
+        return cook;
     }
 }
