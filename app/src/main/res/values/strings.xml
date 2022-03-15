@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">2184746 Share a Meal</string>
     <string name="currency">Price: €</string>
+    <string name="commitButton">Filter</string>
+    <string name="vegaButton">vega</string>
+    <string name="allButton">all</string>
+    <string name="veganButton">vegan</string>
 </resources>

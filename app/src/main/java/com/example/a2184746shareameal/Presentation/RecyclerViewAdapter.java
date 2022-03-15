@@ -86,6 +86,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick(View view) {
             onNoteListener.onNoteClick(getAdapterPosition());
+            // onclick listener method implemented using the interface
         }
 
         public interface onNoteListener {

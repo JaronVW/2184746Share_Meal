@@ -12,8 +12,9 @@ public class Formatters {
 
     public static String cleanDate(String d){
         String[] date = d.split("T");
-
+        // cleans date retrieved from API
         return date[0];
+
     }
 
     public static String returnCheckmarkorX(boolean b){
@@ -21,6 +22,7 @@ public class Formatters {
             return "✔";
         }
         return "❌";
+        // returns checkmarks and X
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -33,7 +35,7 @@ public class Formatters {
                 vegaList.add(meal);
             }
         }
-
+        // filters list of meals and puts them in two araylists
         return new ArrayList[]{veganList, vegaList};
     }
 }

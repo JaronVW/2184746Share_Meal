@@ -1,6 +1,7 @@
 package com.example.a2184746shareameal.Presentation;
 
 import android.annotation.SuppressLint;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -13,6 +14,8 @@ import com.example.a2184746shareameal.Domain.Meal;
 import com.example.a2184746shareameal.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 public class MealDetailActivity extends AppCompatActivity {
 
 
@@ -20,6 +23,8 @@ public class MealDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_meal_detail);
+        Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.green)));
+        // sets actionbar color
 
         if (getIntent().getExtras() != null) {
             Meal passedMeal = (Meal) getIntent().getSerializableExtra("meal");
@@ -47,7 +52,7 @@ public class MealDetailActivity extends AppCompatActivity {
             isVegan.setText("Vegan " + Formatters.returnCheckmarkorX(passedMeal.getIsVegan()));
             cookName.setText(passedMeal.getCook().getFirstName()+ " "+ passedMeal.getCook().getLastName());
             mealCity.setText(passedMeal.getCook().getCity());
-
+            // assigns object data to textViews and imageview
 
         }
 

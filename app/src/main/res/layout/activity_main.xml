@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Presentation.MainActivity">
+    tools:context=".Presentation.MainActivity"
+    android:background="#ffffffff">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -24,11 +25,12 @@
         android:id="@+id/linearLayout4"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#4CAF50"
+        android:background="@color/green"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center">
 
         <RadioGroup
             android:id="@+id/radioGroup"
@@ -40,28 +42,33 @@
                 android:id="@+id/veganButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="vegan" />
+                android:text="@string/veganButton"
+                android:textColor="#ffffffff" />
 
             <RadioButton
                 android:id="@+id/vegaButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="vega" />
+                android:text="@string/vegaButton"
+                android:textColor="#ffffffff" />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/allButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="RadioButton" />
+                android:text="@string/allButton"
+                android:textColor="#FFFFFF" />
 
         </RadioGroup>
 
         <Button
-            android:id="@+id/button2"
-            android:layout_width="match_parent"
+            android:id="@+id/commitButton"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:backgroundTint="#AF4CAB"
+            android:text="@string/commitButton"
+            android:onClick="newRecyclerView"/>
 
     </LinearLayout>
 
