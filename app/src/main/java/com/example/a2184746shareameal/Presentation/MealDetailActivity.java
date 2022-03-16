@@ -2,6 +2,7 @@ package com.example.a2184746shareameal.Presentation;
 
 import android.annotation.SuppressLint;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
@@ -23,6 +24,7 @@ public class MealDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstance) {
         super.onCreate(savedInstance);
         setContentView(R.layout.activity_meal_detail);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         Objects.requireNonNull(getSupportActionBar()).setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.green)));
         // sets actionbar color
 
@@ -36,22 +38,31 @@ public class MealDetailActivity extends AppCompatActivity {
             TextView isVegan = findViewById(R.id.isVegan);
             TextView cookName = findViewById(R.id.cookName);
             TextView mealCity = findViewById(R.id.mealCity);
+            TextView allergeneInfo = findViewById(R.id.allergeneInfo);
 
             ImageView mealImage = findViewById(R.id.mealImage);
             Picasso.with(this)
                     .load(passedMeal.getImageUrl())
                     .into(mealImage);
 
+            ImageView cookImage = findViewById(R.id.cookImage);
+            cookImage.setImageResource(R.drawable.cook_image);
+            Log.d("debug", passedMeal.toString());
 
-            Log.d("debug", passedMeal.getName());
 
             mealName.setText(passedMeal.getName());
             description.setText(passedMeal.getDescription());
             mealPrice.setText("Price: €" + passedMeal.getPrice());
-            isVega.setText("Vega " + Formatters.returnCheckmarkorX(passedMeal.getIsVega()));
-            isVegan.setText("Vegan " + Formatters.returnCheckmarkorX(passedMeal.getIsVegan()));
-            cookName.setText(passedMeal.getCook().getFirstName()+ " "+ passedMeal.getCook().getLastName());
+            isVega.setText("Vega " + Formatters.returnCheckmarkOrX(passedMeal.getIsVega()));
+            isVegan.setText("Vegan " + Formatters.returnCheckmarkOrX(passedMeal.getIsVegan()));
+            cookName.setText(passedMeal.getCook().getFirstName() + " " + passedMeal.getCook().getLastName());
             mealCity.setText(passedMeal.getCook().getCity());
+
+            StringBuilder text = new StringBuilder("Allergenes: ");
+            for (String a : passedMeal.getAllergenes()) {
+                text.append(" ").append(a);
+            }
+            allergeneInfo.setText(text);
             // assigns object data to textViews and imageview
 
         }

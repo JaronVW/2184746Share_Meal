@@ -17,7 +17,7 @@ public class Formatters {
 
     }
 
-    public static String returnCheckmarkorX(boolean b){
+    public static String returnCheckmarkOrX(boolean b){
         if(b){
             return "✔";
         }
@@ -35,7 +35,7 @@ public class Formatters {
                 vegaList.add(meal);
             }
         }
-        // filters list of meals and puts them in two araylists
+        // filters list of meals and puts them in two arraylists
         return new ArrayList[]{veganList, vegaList};
     }
 }

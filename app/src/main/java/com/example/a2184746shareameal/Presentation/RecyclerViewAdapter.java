@@ -1,6 +1,8 @@
 package com.example.a2184746shareameal.Presentation;
 
 import android.content.Context;
+import android.nfc.Tag;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +25,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private final ArrayList<Meal> MealList;
     private final LayoutInflater inflater;
     private final Context context;
-    private ViewHolder.onNoteListener onNoteListener;
+    private final ViewHolder.onNoteListener onNoteListener;
+    private final String TAG = getClass().getSimpleName();
 
 
     public RecyclerViewAdapter(Context context, ArrayList<Meal> mealList, ViewHolder.onNoteListener onNoteListener) {
@@ -48,14 +51,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .placeholder(R.drawable.ic_launcher_background)
                 .fit()
                 .into(holder.image);
+        // Picasso, a package used to import online images to image resources
 
-
-//        holder.image.setImageResource(mealList.get(position).getImageUrl());
         holder.name.setText(MealList.get(position).getName());
         holder.date.setText(Formatters.cleanDate(MealList.get(position).getDateTime()));
-        holder.city.setText(MealList.get(position).getName());
+        holder.city.setText(MealList.get(position).getCook().getCity());
         holder.price.setText("Price: €" + MealList.get(position).getPrice());
-
+        // values bound to components
+        Log.d(TAG,"values bound to components");
     }
 
     @Override
@@ -64,11 +67,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        // viewholder inner class
 
         private final ImageView image;
         private final TextView name, date, city, price;
-        private final RecyclerViewAdapter adapter;
         onNoteListener onNoteListener;
+        private String TAG = getClass().getSimpleName();
 
         public ViewHolder(@NonNull View itemView, RecyclerViewAdapter mAdapter, onNoteListener onNoteListener) {
             super(itemView);
@@ -78,7 +82,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             city = itemView.findViewById(R.id.city);
             price = itemView.findViewById(R.id.price);
             // assigns data in recyclerview to variables to pass content from object
-            this.adapter = mAdapter;
             this.onNoteListener = onNoteListener;
             itemView.setOnClickListener(this);
         }
@@ -86,6 +89,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         @Override
         public void onClick(View view) {
             onNoteListener.onNoteClick(getAdapterPosition());
+            Log.d(TAG,"click method");
             // onclick listener method implemented using the interface
         }
 

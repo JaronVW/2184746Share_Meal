@@ -1,8 +1,6 @@
 package com.example.a2184746shareameal.Presentation;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,7 +18,7 @@ import com.example.a2184746shareameal.DataStorage.APIConnection;
 import com.example.a2184746shareameal.Domain.Meal;
 import com.example.a2184746shareameal.R;
 
-import java.io.Serializable;
+
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -28,13 +26,10 @@ public class MainActivity extends AppCompatActivity implements APIConnection.Mea
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter recyclerViewAdapter;
-    private APIConnection apiConnection = null;
     private ArrayList<Meal> mealList = new ArrayList<>();
     private ArrayList<Meal> veganMealList = new ArrayList<>();
     private ArrayList<Meal> vegaMealList = new ArrayList<>();
-    private RadioGroup radioGroup;
-    private RadioButton radioButton;
-    private String TAG = getClass().getSimpleName();
+    private final String TAG = getClass().getSimpleName();
 
 
 
@@ -48,10 +43,10 @@ public class MainActivity extends AppCompatActivity implements APIConnection.Mea
         recyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
         recyclerView.setLayoutManager(layoutManager);
-        this.apiConnection = new APIConnection("https://shareameal-api.herokuapp.com");
-        this.apiConnection.getAPIData(this);
+        APIConnection apiConnection = new APIConnection("https://shareameal-api.herokuapp.com");
+        apiConnection.getAPIData(this);
 
-        Log.d(TAG,"APIConnection succeded");
+        Log.d(TAG,"APIConnection succeeded");
 
     }
 
@@ -82,15 +77,15 @@ public class MainActivity extends AppCompatActivity implements APIConnection.Mea
     public void onNoteClick(int position) {
 
         Intent intent = new Intent(this, MealDetailActivity.class);
-        intent.putExtra("meal", (Serializable) mealList.get(position));
+        intent.putExtra("meal",  mealList.get(position));
         startActivity(intent);
     }
 
     public void newRecyclerView(View view) {
-        radioGroup = findViewById(R.id.radioGroup);
+        RadioGroup radioGroup = findViewById(R.id.radioGroup);
 
         int selectedId = radioGroup.getCheckedRadioButtonId();
-        radioButton = findViewById(selectedId);
+        RadioButton radioButton = findViewById(selectedId);
 
         try {
 
@@ -98,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements APIConnection.Mea
             int duration;
             Toast toast;
             switch (String.valueOf(radioButton.getText())) {
-                // checks the value of radiogroup to change recyclerview data
+                // checks the value of radioGroup to change recyclerview data
                 case "vegan":
 
                     this.recyclerViewAdapter = new RecyclerViewAdapter(MainActivity.this, veganMealList, this);
